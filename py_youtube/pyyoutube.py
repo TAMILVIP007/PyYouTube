@@ -52,68 +52,61 @@ class Data:
       		
       # Get Video id 
       def id(self):
-      	try:
-      		videodetails=re.findall("\"videoDetails\":\{(.+?),\"isOwnerViewing", self.source)[0]
-      	except:
-      		return None
-      	try:
-      		#Get id , title From videodetails variable
-      		id = re.findall("\"videoId\":\"(\S{11})",videodetails)[0]
-      		return id 
-      	except:
-      		return None
+            try:
+            	videodetails=re.findall("\"videoDetails\":\{(.+?),\"isOwnerViewing", self.source)[0]
+            except:
+            	return None
+            try:
+                  return re.findall("\"videoId\":\"(\S{11})",videodetails)[0]
+            except:
+            	return None
       		
       	
       			
       # Get Video Title 	
       def title(self):
-      	try:
-      		videodetails=re.findall("\"videoDetails\":\{(.+?),\"isOwnerViewing", self.source)[0]
-      	except:
-      		return None
-      	try:
-      		#Get id , title From videodetails variable
-      		title = re.findall("\"title\":\"(.+?)\",",videodetails)[0]
-      		return title 
-      	except:
-      		return None
+            try:
+            	videodetails=re.findall("\"videoDetails\":\{(.+?),\"isOwnerViewing", self.source)[0]
+            except:
+            	return None
+            try:
+                  return re.findall("\"title\":\"(.+?)\",",videodetails)[0]
+            except:
+            	return None
     
       
       
       #Get Thumbnails Link From Youtube Video 
       def thumb(self):
-      		try :
-      			thumb= re.findall("\"thumbnails\":\[\{\"url\":\"(.+?)\",\"width",self.source )[0]
-      			return thumb
-      		except:
-      			return None
+            try:
+                  return re.findall("\"thumbnails\":\[\{\"url\":\"(.+?)\",\"width",
+                                    self.source)[0]
+            except:
+            	return None
       		
       		
      # Get Video Publish Date 	
       def publish_date(self):
-      	try:
-      		publish_date = re.findall("\"publishDate\":\"(\d{4}-\d{2}-\d{2})", self.source)[0]
-      		return publish_date
-      	except:
-      		return None
+            try:
+                  return re.findall("\"publishDate\":\"(\d{4}-\d{2}-\d{2})", self.source)[0]
+            except:
+            	return None
       	
       
       # Get Views Of the Video
       def views(self):
-      	try:      		 
-      		views = re.findall("\"viewCount\":\"(\d+)",self.source)[0]
-      		return views
-      	except:
-      		return None
+            try:		 
+                  return re.findall("\"viewCount\":\"(\d+)",self.source)[0]
+            except:
+            	return None
       
       
       # Get Category Of The Video 
       def category(self):
-      	try:      		
-      		category = re.findall("\"category\":\"(.+?)\",", self.source)[0]
-      		return category
-      	except:
-      		return None
+            try:		
+                  return re.findall("\"category\":\"(.+?)\",", self.source)[0]
+            except:
+            	return None
       
       
       
@@ -133,29 +126,28 @@ class Data:
       				
       #Get likes Of The Video 				
       def likes(self):
-      		try:
-      			likes = re.findall("accessibilityData\":{\"label\":\"(\S+) likes", self.source)[0]
-      			return likes
-      		except:
-      			return None
+            try:
+                  return re.findall("accessibilityData\":{\"label\":\"(\S+) likes",
+                                    self.source)[0]
+            except:
+            	return None
       		
      
       		 		
       #Get dislikes Of The Video    		
       def dislikes(self): 
-      	try:
-      		dislikes = re.findall("accessibilityData\":{\"label\":\"(\S+) dislike", self.source)[0]
-      		return dislikes
-      	except:
-      		return None
+            try:
+                  return re.findall("accessibilityData\":{\"label\":\"(\S+) dislike",
+                                    self.source)[0]
+            except:
+            	return None
       
       # Get YouTube Videos tag 		
       def tags(self):
-      	try:
-      		tags = re.findall("\<meta name=\"keywords\" content=\"(.+?)\">",self.source)[0]
-      		return tags
-      	except:
-      		return None
+            try:
+                  return re.findall("\<meta name=\"keywords\" content=\"(.+?)\">",self.source)[0]
+            except:
+            	return None
       		
       			
       			
@@ -172,87 +164,85 @@ class Data:
       				return None 
       			
       def data(self):
-      	try:
-      		# Get Video Details 
-      		videodetails=re.findall("\"videoDetails\":\{(.+?),\"isOwnerViewing", self.source)[0]
-      	except:
-      		videodetails = None
-      	try:
-      		#Get id , title From videodetails variable
-      		id = re.findall("\"videoId\":\"(\S{11})",videodetails)[0]
-      		title = re.findall("\"title\":\"(.+?)\",",videodetails)[0]
-      	except:
-      		title = None
-      		id = None
-      	try :
-      		#Get Thumbnails Link From Youtube Video 
-      		thumb= re.findall("\"thumbnails\":\[\{\"url\":\"(.+?)\",\"width",self.source )[0]
-      	except:
-      		thumb = None
-      	try:
-      		# Get Video Publish Date 
-      		publish_date = re.findall("\"publishDate\":\"(\d{4}-\d{2}-\d{2})", self.source)[0]
-      	except:
-      		publish_date = None
-      	try:
-      		# Get Views Of the Video 
-      		views = re.findall("\"viewCount\":\"(\d+)",self.source)[0]
-      	except:
-      		views = None
-      	try:
-      		# Get Category Of The Video 
-      		category = re.findall("\"category\":\"(.+?)\",", self.source)[0]
-      	except:
-      		category = None       		
-      	try:
-      		# Get Channel Name 
-      		channelName = e.findall("\"channelName\":\"(.+?)\",", self.source)[0]
-      	except:
-      		try:
-      			channelName = re.findall("\"ownerChannelName\":\"(.+?)\",\"uploadDate",self.source)[0]
-      		except:
-      			channelName = None
-      			
-      	try:
-      		#Get likes Of The Video 
-      		likes = re.findall("accessibilityData\":{\"label\":\"(\S+) likes", self.source)[0]
-      	except:
-      		likes = None
-      	try:
-      		#Get dislikes Of The Video 
-      		dislikes = re.findall("accessibilityData\":{\"label\":\"(\S+) dislike", self.source)[0]
-      	except:
-      		dislikes = None 
-      	try:
-      		#Get Subscriber of The video 
-      		sub = re.findall("accessibilityData\":{\"label\":\"(\S+) subscribers", self.source)[0]
-      	except:
-      		try:
-      			sub = re.findall("subscriberCountText\":{\"accessibility\":{\"accessibilityData\":{\"label\":\"(.+?)\"}}", self.source)[0]  
-      		except:
-      			sub = None
-      		# kewords(tag)
-      	try:
-      		tags = re.findall("\<meta name=\"keywords\" content=\"(.+?)\">",self.source)[0]
-      	except:
-      		tags = None
-      		
-      		
-      			
-      		
-      	DATA = { 
-      	             "id": id,
-      	             "title": title,
-      	             "thumbnails": thumb,
-      	             "duration":duration,
-      	             "views": views,
-      	             "likes": likes,
-      	             "dislikes":dislikes,
-      	             "publishdate": publish_date,
-      	             "category": category,
-      	             "channel_name": channelName,
-      	             "subscriber":sub,
-      	             "keywords":tags      	             
-      	        }
-      	 
-      	return DATA
+            try:
+            	# Get Video Details 
+            	videodetails=re.findall("\"videoDetails\":\{(.+?),\"isOwnerViewing", self.source)[0]
+            except:
+            	videodetails = None
+            try:
+            	#Get id , title From videodetails variable
+            	id = re.findall("\"videoId\":\"(\S{11})",videodetails)[0]
+            	title = re.findall("\"title\":\"(.+?)\",",videodetails)[0]
+            except:
+            	title = None
+            	id = None
+            try :
+            	#Get Thumbnails Link From Youtube Video 
+            	thumb= re.findall("\"thumbnails\":\[\{\"url\":\"(.+?)\",\"width",self.source )[0]
+            except:
+            	thumb = None
+            try:
+            	# Get Video Publish Date 
+            	publish_date = re.findall("\"publishDate\":\"(\d{4}-\d{2}-\d{2})", self.source)[0]
+            except:
+            	publish_date = None
+            try:
+            	# Get Views Of the Video 
+            	views = re.findall("\"viewCount\":\"(\d+)",self.source)[0]
+            except:
+            	views = None
+            try:
+            	# Get Category Of The Video 
+            	category = re.findall("\"category\":\"(.+?)\",", self.source)[0]
+            except:
+            	category = None
+            try:
+            	# Get Channel Name 
+            	channelName = e.findall("\"channelName\":\"(.+?)\",", self.source)[0]
+            except:
+            	try:
+            		channelName = re.findall("\"ownerChannelName\":\"(.+?)\",\"uploadDate",self.source)[0]
+            	except:
+            		channelName = None
+
+            try:
+            	#Get likes Of The Video 
+            	likes = re.findall("accessibilityData\":{\"label\":\"(\S+) likes", self.source)[0]
+            except:
+            	likes = None
+            try:
+            	#Get dislikes Of The Video 
+            	dislikes = re.findall("accessibilityData\":{\"label\":\"(\S+) dislike", self.source)[0]
+            except:
+            	dislikes = None
+            try:
+            	#Get Subscriber of The video 
+            	sub = re.findall("accessibilityData\":{\"label\":\"(\S+) subscribers", self.source)[0]
+            except:
+            	try:
+            		sub = re.findall("subscriberCountText\":{\"accessibility\":{\"accessibilityData\":{\"label\":\"(.+?)\"}}", self.source)[0]  
+            	except:
+            		sub = None
+            	# kewords(tag)
+            try:
+            	tags = re.findall("\<meta name=\"keywords\" content=\"(.+?)\">",self.source)[0]
+            except:
+            	tags = None
+
+
+
+
+            return {
+                "id": id,
+                "title": title,
+                "thumbnails": thumb,
+                "duration": duration,
+                "views": views,
+                "likes": likes,
+                "dislikes": dislikes,
+                "publishdate": publish_date,
+                "category": category,
+                "channel_name": channelName,
+                "subscriber": sub,
+                "keywords": tags,
+            }

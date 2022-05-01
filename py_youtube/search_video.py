@@ -44,7 +44,8 @@ class Search:
 	def __init__(self,keywords:str , limit=15):
 		
 		search_keyword=keywords.replace(" ", "+")
-		html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + search_keyword)
+		html = urllib.request.urlopen(
+		    f"https://www.youtube.com/results?search_query={search_keyword}")
 		self.limit= limit
 		self.source = html.read().decode('utf8')
 		
@@ -105,15 +106,13 @@ class Search:
 		data  = re.findall('{\"videoRenderer\":{\"videoId\":\"(\S{11})\",\"thumbnail\":{\"thumbnails\":\[{\"url\":\"(\S+)\",\"width\":360,\"height\":202},{\"url\":\"(\S+)\",\"width\":720,\"height\":404}\]},\"title\":{\"runs\":\[{\"text\":\"(.+?)\"}\],\"accessibility\":{\"accessibilityData\":{\"label\":\"(.+?)\"}}},\"longBylineText\"',source)[:limit]
 		data_ = []
 		for i in data:
-				js_data = {"id":"",
-		            "title":"", 
-		             "thumb" : "" ,
-		              "simple_data":""}
-				js_data['id'] = i[0]
-				js_data['title'] = i[3]
-				js_data['thumb'] = i[1],i[2]
-				js_data['simple_data'] = i[4]
-				data_.append(js_data)
+			js_data = {
+			    'id': i[0],
+			    'title': i[3],
+			    'thumb': (i[1], i[2]),
+			    'simple_data': i[4],
+			}
+			data_.append(js_data)
 		value =  json.dumps(data_ )
 		return json.loads(value)
 						
